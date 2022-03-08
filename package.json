@@ -1,0 +1,16 @@
+{
+  "name": "create-coupons-script",
+  "version": "1.0.0",
+  "description": "Create coupons with custom codes",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "env-cmd node src/index.js"
+  },
+  "keywords": [],
+  "author": "Emanuel Friedrich",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "env-cmd": "^10.1.0"
+  }
+}
