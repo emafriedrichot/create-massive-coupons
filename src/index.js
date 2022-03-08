@@ -25,14 +25,18 @@ if (paramsAreValid === false) {
 }
 
 function genCouponCodes() {
-  const couponsToCreate = Number(process.env.COUPONS_TO_CREATE);
-  const couponCodes = [];
-  for (let index = 0; index < couponsToCreate; index++) {
-    let couponCode = genCouponCode(7);
-    while (couponCodes.includes(couponCode)) {
-      couponCode = genCouponCode(7);
+  let couponCodes = [];
+  if (fs.existsSync(process.env.COUPONS_TO_CREATE)) {
+    couponCodes = JSON.parse(fs.readFileSync(process.env.COUPONS_TO_CREATE, 'utf-8'));
+  } else {
+    const couponsToCreate = Number(process.env.COUPONS_TO_CREATE);
+    for (let index = 0; index < couponsToCreate; index++) {
+      let couponCode = genCouponCode(7);
+      while (couponCodes.includes(couponCode)) {
+        couponCode = genCouponCode(7);
+      }
+      couponCodes.push(couponCode);
     }
-    couponCodes.push(couponCode);
   }
 
   console.log("Coupons to create", couponCodes);
@@ -50,7 +54,7 @@ async function createCouponsInVtex(coupons) {
     apiCoupons.push({
       quantity: 1,
       couponConfiguration: {
-        utmSource: process.env.UTM_SOURCE,
+        utmSource: process.env.UTM_SOURCE === 'same-as-coupon-code' ? coupon : process.env.UTM_SOURCE,
         utmCampaign: process.env.UTM_CAMPAIGN,
         couponCode: coupon,
         maxItemsPerClient: 1,
