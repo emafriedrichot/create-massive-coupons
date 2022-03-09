@@ -57,7 +57,7 @@ async function createCouponsInVtex(coupons) {
         utmSource: process.env.UTM_SOURCE === 'same-as-coupon-code' ? coupon : process.env.UTM_SOURCE,
         utmCampaign: process.env.UTM_CAMPAIGN,
         couponCode: coupon,
-        maxItemsPerClient: 1,
+        maxItemsPerClient: 1000,
         expirationIntervalPerUse: "00:00:00",
       },
     });
