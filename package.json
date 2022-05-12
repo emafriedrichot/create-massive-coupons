@@ -4,7 +4,8 @@
   "description": "Create coupons with custom codes",
   "main": "src/index.js",
   "scripts": {
-    "start": "env-cmd node src/index.js"
+    "start": "env-cmd node src/index.js",
+    "archive-coupons": "env-cmd node src/archive-coupons.js"
   },
   "keywords": [],
   "author": "Emanuel Friedrich",
